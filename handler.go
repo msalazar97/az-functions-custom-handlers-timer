@@ -7,14 +7,13 @@ import (
 	"os"
 )
 
-func simpleTimer(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("hello world")
-	message := "TESTING TIMER TRIGGER \n"
-	name := r.URL.Query().Get("name")
-	if name != "" {
-		message = fmt.Sprintf("Hello, %s.\n", name)
-	}
-	fmt.Fprint(w, message)
+func HttpHandler(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte("Hello There!"))
+}
+func TimerHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json; charset=utf-8")
+	fmt.Println("Timer triggered!")
+	w.Write([]byte("{}"))
 }
 
 func main() {
@@ -23,6 +22,7 @@ func main() {
 		fmt.Println("FUNCTIONS_CUSTOMHANDLER_PORT: " + customHandlerPort)
 	}
 	mux := http.NewServeMux()
-	mux.HandleFunc("/TimerExample", simpleTimer)
+	mux.HandleFunc("/TimerExample", TimerHandler)
+	mux.HandleFunc("/api/http", HttpHandler)
 	log.Fatal(http.ListenAndServe(":"+customHandlerPort, mux))
 }
