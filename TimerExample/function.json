@@ -4,7 +4,7 @@
       "name": "TimerExample",
       "type": "timerTrigger",
       "direction": "in",
-      "schedule": "* * * * *"
+      "schedule": "*/30 * * * * *"
     }
   ]
 }
