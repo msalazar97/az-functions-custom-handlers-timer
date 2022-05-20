@@ -7,9 +7,6 @@ import (
 	"os"
 )
 
-func HttpHandler(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("Hello There!"))
-}
 func TimerHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	fmt.Println("Timer triggered!")
@@ -23,6 +20,5 @@ func main() {
 	}
 	mux := http.NewServeMux()
 	mux.HandleFunc("/TimerExample", TimerHandler)
-	mux.HandleFunc("/api/http", HttpHandler)
 	log.Fatal(http.ListenAndServe(":"+customHandlerPort, mux))
 }
